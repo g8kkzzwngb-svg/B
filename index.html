@@ -1,468 +1,442 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OperatorSim - NFC Admin</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b12">
+  <title>OperatorSim | NFC Demo</title>
 
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
-
-body {
-    background: #0b1020;
-    color: #fff;
-    min-height: 100vh;
-}
-
-header {
-    background: #121a30;
-    padding: 18px 25px;
-    border-bottom: 1px solid #26304b;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.badge {
-    background: #1c7c54;
-    padding: 7px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-}
-
-.container {
-    max-width: 1100px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
-
-h1 {
-    margin-bottom: 8px;
-}
-
-.subtitle {
-    color: #9ca8c7;
-    margin-bottom: 25px;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.card {
-    background: #121a30;
-    border: 1px solid #26304b;
-    border-radius: 16px;
-    padding: 22px;
-}
-
-.card h2 {
-    margin-bottom: 18px;
-    font-size: 19px;
-}
-
-.nfc-box {
-    border: 2px dashed #405071;
-    border-radius: 14px;
-    padding: 35px 20px;
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-.nfc-icon {
-    font-size: 55px;
-    margin-bottom: 12px;
-}
-
-.status {
-    color: #9ca8c7;
-    margin: 10px 0 20px;
-    min-height: 20px;
-}
-
-button {
-    width: 100%;
-    padding: 13px;
-    border: none;
-    border-radius: 10px;
-    background: #2563eb;
-    color: white;
-    font-size: 15px;
-    cursor: pointer;
-    margin-top: 9px;
-}
-
-button:hover {
-    background: #1d4ed8;
-}
-
-.demo {
-    background: #374151;
-}
-
-.demo:hover {
-    background: #4b5563;
-}
-
-.danger {
-    background: #b91c1c;
-}
-
-.danger:hover {
-    background: #991b1b;
-}
-
-input, select {
-    width: 100%;
-    padding: 12px;
-    margin-top: 7px;
-    margin-bottom: 13px;
-    border-radius: 9px;
-    border: 1px solid #34405e;
-    background: #0b1020;
-    color: white;
-}
-
-label {
-    color: #aeb8d0;
-    font-size: 13px;
-}
-
-.info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.info-item {
-    background: #0b1020;
-    padding: 13px;
-    border-radius: 9px;
-}
-
-.info-item span {
-    display: block;
-    color: #8793b0;
-    font-size: 12px;
-    margin-bottom: 5px;
-}
-
-.info-item strong {
-    font-size: 14px;
-}
-
-.log {
-    margin-top: 20px;
-    background: #080c17;
-    border-radius: 10px;
-    padding: 14px;
-    max-height: 180px;
-    overflow-y: auto;
-    font-family: monospace;
-    font-size: 12px;
-    color: #8ee0b6;
-}
-
-@media(max-width: 750px) {
-    .grid {
-        grid-template-columns: 1fr;
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                   "Segoe UI", sans-serif;
     }
-}
-</style>
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #080b12;
+      color: white;
+    }
+
+    header {
+      padding: 22px 20px;
+      border-bottom: 1px solid #202532;
+      background: #0d111a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .badge {
+      background: #17351f;
+      color: #5cff86;
+      padding: 7px 11px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    main {
+      width: min(700px, 92%);
+      margin: 25px auto;
+    }
+
+    .card {
+      background: #10151f;
+      border: 1px solid #222a38;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 12px 35px rgba(0,0,0,.25);
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 20px;
+    }
+
+    .sub {
+      color: #8d97a8;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    button,
+    select {
+      width: 100%;
+      border: 0;
+      border-radius: 13px;
+      padding: 15px;
+      margin-top: 10px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    button {
+      background: #246bff;
+      color: white;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      background: #202838;
+    }
+
+    button.green {
+      background: #159447;
+    }
+
+    button:active {
+      transform: scale(.98);
+    }
+
+    select {
+      background: #1a202c;
+      color: white;
+      border: 1px solid #30394a;
+    }
+
+    .status {
+      margin-top: 14px;
+      padding: 13px;
+      border-radius: 12px;
+      background: #171d28;
+      color: #aeb8c8;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .customer {
+      display: none;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 13px 0;
+      border-bottom: 1px solid #222a38;
+    }
+
+    .row:last-child {
+      border-bottom: 0;
+    }
+
+    .label {
+      color: #8d97a8;
+    }
+
+    .value {
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .internet {
+      font-size: 28px;
+      font-weight: 800;
+      margin: 10px 0 5px;
+    }
+
+    .small {
+      color: #8d97a8;
+      font-size: 12px;
+    }
+
+    .nfc-icon {
+      font-size: 50px;
+      text-align: center;
+      margin: 8px 0;
+    }
+
+    footer {
+      text-align: center;
+      color: #687386;
+      font-size: 12px;
+      padding: 20px;
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
-    <div class="logo">📡 OperatorSim</div>
-    <div class="badge">DEMO / SIMULATION</div>
+  <div class="logo">OperatorSim</div>
+  <div class="badge">DEMO / SIMULATION</div>
 </header>
 
-<div class="container">
+<main>
 
-    <h1>Operatör Yönetim Paneli</h1>
-    <p class="subtitle">
-        NFC destekli demo müşteri kartı yönetim sistemi
+  <div class="card">
+    <div class="nfc-icon">📳</div>
+
+    <h2>NFC Demo Kartı</h2>
+
+    <p class="sub">
+      iPhone Safari gerçek Web NFC erişimi vermediği için bu sistem
+      NFC etiketi tarafından açılan URL'deki demo kart numarasını kullanır.
     </p>
 
-    <div class="grid">
+    <button onclick="loadFromURL()">
+      🔎 URL'deki Kartı Kontrol Et
+    </button>
 
-        <!-- NFC PANEL -->
-        <div class="card">
+    <button class="secondary" onclick="demoCard()">
+      🎫 Demo Kartı Tara
+    </button>
 
-            <h2>📲 NFC Kart Okuyucu</h2>
+    <div id="status" class="status">
+      Hazır. Demo kartını okutabilir veya yukarıdaki butonu kullanabilirsin.
+    </div>
+  </div>
 
-            <div class="nfc-box">
-                <div class="nfc-icon">📡</div>
-                <p>Kartınızı cihazın NFC alanına yaklaştırın</p>
-                <div class="status" id="nfcStatus">
-                    NFC başlatılmadı
-                </div>
-            </div>
 
-            <button onclick="startNFC()">
-                NFC Okumayı Başlat
-            </button>
+  <div id="customerCard" class="card customer">
 
-            <button class="demo" onclick="loadDemoCard()">
-                Demo Kartı Tara
-            </button>
+    <h2>👤 Müşteri Bilgileri</h2>
 
-            <div class="log" id="log">
-                Sistem hazır...
-            </div>
-
-        </div>
-
-        <!-- CUSTOMER -->
-        <div class="card">
-
-            <h2>👤 Demo Müşteri</h2>
-
-            <div class="info">
-
-                <div class="info-item">
-                    <span>Müşteri ID</span>
-                    <strong id="customerId">-</strong>
-                </div>
-
-                <div class="info-item">
-                    <span>Ad Soyad</span>
-                    <strong id="customerName">-</strong>
-                </div>
-
-                <div class="info-item">
-                    <span>Hat</span>
-                    <strong id="phone">-</strong>
-                </div>
-
-                <div class="info-item">
-                    <span>Tarife</span>
-                    <strong id="package">-</strong>
-                </div>
-
-            </div>
-
-            <br>
-
-            <label>Tarife Değiştir</label>
-            <select id="packageSelect">
-                <option>Demo 20 GB</option>
-                <option>Demo 50 GB</option>
-                <option>Demo 100 GB</option>
-                <option>Sınırsız Demo</option>
-            </select>
-
-            <button onclick="changePackage()">
-                Tarife Değiştir
-            </button>
-
-            <button onclick="addInternet()">
-                + 10 GB Demo İnternet
-            </button>
-
-            <button class="danger" onclick="resetCustomer()">
-                Müşteriyi Sıfırla
-            </button>
-
-        </div>
-
+    <div class="row">
+      <span class="label">Kart ID</span>
+      <span class="value" id="customerId">-</span>
     </div>
 
-</div>
+    <div class="row">
+      <span class="label">Ad Soyad</span>
+      <span class="value" id="customerName">-</span>
+    </div>
+
+    <div class="row">
+      <span class="label">Telefon</span>
+      <span class="value" id="customerPhone">-</span>
+    </div>
+
+    <div class="row">
+      <span class="label">Tarife</span>
+      <span class="value" id="customerPackage">-</span>
+    </div>
+
+    <div class="internet">
+      <span id="internet">50</span> GB
+    </div>
+
+    <div class="small">Kalan demo internet</div>
+
+    <button class="green" onclick="addInternet()">
+      +10 GB Demo İnternet
+    </button>
+
+    <select id="packageSelect" onchange="changePackage()">
+      <option>Demo 10 GB</option>
+      <option>Demo 25 GB</option>
+      <option selected>Demo 50 GB</option>
+      <option>Demo 100 GB</option>
+    </select>
+
+    <button class="secondary" onclick="resetCustomer()">
+      🔄 Sıfırla
+    </button>
+
+  </div>
+
+</main>
+
+<footer>
+  OperatorSim • Tamamen demo amaçlıdır • Gerçek müşteri verisi kullanılmaz
+</footer>
+
 
 <script>
 
-let customer = null;
+  const demoCustomers = {
 
-/* LOG */
-function log(message) {
-    const box = document.getElementById("log");
+    "DEMO-48291": {
+      id: "DEMO-48291",
+      name: "Demo Kullanıcı",
+      phone: "05XX XXX XX XX",
+      package: "Demo 50 GB",
+      internet: 50
+    },
 
-    const time = new Date().toLocaleTimeString();
+    "DEMO-12345": {
+      id: "DEMO-12345",
+      name: "Ahmet Demo",
+      phone: "05XX 123 45 67",
+      package: "Demo 25 GB",
+      internet: 25
+    },
 
-    box.innerHTML +=
-        `<div>[${time}] ${message}</div>`;
+    "DEMO-98765": {
+      id: "DEMO-98765",
+      name: "Mehmet Demo",
+      phone: "05XX 987 65 43",
+      package: "Demo 100 GB",
+      internet: 100
+    }
 
-    box.scrollTop = box.scrollHeight;
-}
+  };
 
-/* MÜŞTERİ EKRANA YAZ */
-function displayCustomer(data) {
 
-    customer = data;
+  let currentCustomer = null;
 
-    document.getElementById("customerId").textContent =
-        data.id || "-";
 
-    document.getElementById("customerName").textContent =
-        data.name || "-";
+  function setStatus(text) {
+    document.getElementById("status").innerText = text;
+  }
 
-    document.getElementById("phone").textContent =
-        data.phone || "-";
 
-    document.getElementById("package").textContent =
-        data.package || "-";
+  function showCustomer(customer) {
 
-    log("Demo müşteri bilgileri yüklendi.");
-}
-
-/* DEMO KART */
-function loadDemoCard() {
-
-    const demoCard = {
-        id: "DEMO-48291",
-        name: "Demo Kullanıcı",
-        phone: "05XX XXX XX XX",
-        package: "Demo 50 GB"
+    currentCustomer = {
+      ...customer
     };
 
-    displayCustomer(demoCard);
+    document.getElementById("customerCard").style.display = "block";
 
-    document.getElementById("nfcStatus").textContent =
-        "Demo kart başarıyla okundu.";
+    document.getElementById("customerId").innerText =
+      currentCustomer.id;
 
-    log("Demo NFC kartı simüle edildi.");
-}
+    document.getElementById("customerName").innerText =
+      currentCustomer.name;
 
-/* NFC */
-async function startNFC() {
+    document.getElementById("customerPhone").innerText =
+      currentCustomer.phone;
 
-    if (!("NDEFReader" in window)) {
+    document.getElementById("customerPackage").innerText =
+      currentCustomer.package;
 
-        document.getElementById("nfcStatus").textContent =
-            "Bu tarayıcı Web NFC desteklemiyor.";
+    document.getElementById("internet").innerText =
+      currentCustomer.internet;
 
-        log("Web NFC desteklenmiyor. Demo Kartı Tara kullanılabilir.");
+    document.getElementById("packageSelect").value =
+      currentCustomer.package;
 
-        return;
+    setStatus(
+      "✅ Kart başarıyla yüklendi: " +
+      currentCustomer.id
+    );
+  }
+
+
+  function demoCard() {
+
+    showCustomer(demoCustomers["DEMO-48291"]);
+
+  }
+
+
+  function loadFromURL() {
+
+    const params = new URLSearchParams(
+      window.location.search
+    );
+
+    const cardId = params.get("card");
+
+    if (!cardId) {
+
+      setStatus(
+        "⚠️ URL içinde kart bulunamadı. Örnek: ?card=DEMO-48291"
+      );
+
+      return;
     }
 
-    try {
-
-        const ndef = new NDEFReader();
-
-        await ndef.scan();
-
-        document.getElementById("nfcStatus").textContent =
-            "NFC aktif. Demo kartı yaklaştırın.";
-
-        log("NFC okuyucu başlatıldı.");
-
-        ndef.onreadingerror = () => {
-            log("NFC okuma hatası.");
-        };
-
-        ndef.onreading = ({ message }) => {
-
-            log("NFC etiketi algılandı.");
-
-            for (const record of message.records) {
-
-                try {
-
-                    const decoder = new TextDecoder(
-                        record.encoding || "utf-8"
-                    );
-
-                    const text = decoder.decode(record.data);
-
-                    log("NFC verisi alındı.");
-
-                    /*
-                     * DEMO FORMAT:
-                     *
-                     * {
-                     *   "id":"DEMO-123",
-                     *   "name":"Demo Kullanıcı",
-                     *   "phone":"05XX XXX XX XX",
-                     *   "package":"Demo 20 GB"
-                     * }
-                     */
-
-                    const data = JSON.parse(text);
-
-                    displayCustomer(data);
-
-                    document.getElementById("nfcStatus").textContent =
-                        "Demo kart başarıyla okundu.";
-
-                } catch (error) {
-
-                    log("NFC verisi geçerli demo JSON formatında değil.");
-
-                }
-            }
-        };
-
-    } catch (error) {
-
-        log("NFC başlatılamadı: " + error.message);
-
-        document.getElementById("nfcStatus").textContent =
-            "NFC başlatılamadı.";
-    }
-}
-
-/* TARİFE DEĞİŞTİR */
-function changePackage() {
+    const customer = demoCustomers[cardId];
 
     if (!customer) {
-        alert("Önce demo kart okutun.");
-        return;
+
+      setStatus(
+        "❌ Bu demo kartı sistemde bulunamadı: " +
+        cardId
+      );
+
+      return;
     }
+
+    showCustomer(customer);
+  }
+
+
+  function addInternet() {
+
+    if (!currentCustomer) return;
+
+    currentCustomer.internet += 10;
+
+    document.getElementById("internet").innerText =
+      currentCustomer.internet;
+
+    setStatus(
+      "✅ Demo müşteriye 10 GB eklendi."
+    );
+  }
+
+
+  function changePackage() {
+
+    if (!currentCustomer) return;
 
     const selected =
-        document.getElementById("packageSelect").value;
+      document.getElementById("packageSelect").value;
 
-    customer.package = selected;
+    currentCustomer.package = selected;
 
-    document.getElementById("package").textContent =
-        selected;
+    document.getElementById("customerPackage").innerText =
+      selected;
 
-    log("Demo tarife değiştirildi: " + selected);
-}
+    const numbers = {
+      "Demo 10 GB": 10,
+      "Demo 25 GB": 25,
+      "Demo 50 GB": 50,
+      "Demo 100 GB": 100
+    };
 
-/* İNTERNET EKLE */
-function addInternet() {
+    currentCustomer.internet =
+      numbers[selected];
 
-    if (!customer) {
-        alert("Önce demo kart okutun.");
-        return;
+    document.getElementById("internet").innerText =
+      currentCustomer.internet;
+
+    setStatus(
+      "✅ Demo tarife değiştirildi: " +
+      selected
+    );
+  }
+
+
+  function resetCustomer() {
+
+    currentCustomer = null;
+
+    document.getElementById("customerCard")
+      .style.display = "none";
+
+    setStatus(
+      "Hazır. Yeni demo kartı okutabilirsin."
+    );
+  }
+
+
+  // Sayfa NFC etiketi tarafından
+  // ?card=DEMO-48291 şeklinde açıldıysa
+  // müşteriyi otomatik yükle.
+  window.addEventListener("load", () => {
+
+    const params = new URLSearchParams(
+      window.location.search
+    );
+
+    if (params.has("card")) {
+      loadFromURL();
     }
 
-    log("Demo müşteriye +10 GB internet tanımlandı.");
-
-    alert("Demo işlem başarılı!\n+10 GB internet eklendi.");
-}
-
-/* SIFIRLA */
-function resetCustomer() {
-
-    customer = null;
-
-    document.getElementById("customerId").textContent = "-";
-    document.getElementById("customerName").textContent = "-";
-    document.getElementById("phone").textContent = "-";
-    document.getElementById("package").textContent = "-";
-
-    document.getElementById("nfcStatus").textContent =
-        "NFC başlatılmadı";
-
-    log("Müşteri ekranı temizlendi.");
-}
+  });
 
 </script>
 
